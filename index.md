@@ -24,7 +24,10 @@ Here is some code for serving a simple JSON snippet from a single endpoint.
     {
         server server{server::mime_type{"text/json"}, server::port{8443}};
 
-        server.handle_response(request_method::GET, "/endpoint", [](std::vector<std::string> matches, query_params params, response &response) -> status_code
+        server.handle_response(request_method::GET,
+            "/endpoint", 
+            [](std::vector<std::string> matches,
+                query_params params, response &response) -> status_code
         {
             response = {"{\"made_it\": true}"};
             return 200;
