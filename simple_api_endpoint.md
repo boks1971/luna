@@ -41,16 +41,28 @@ The first line simply instantiates an HTTP server object on port 8443. The final
 
 ## Using query parameters
 
+(The code discussed here is available in `examples/example2.cpp`.)
+
 Of course, we could have loaded this HTML from a file, rather than specifying it with a string constant. Or we can generate it dynamically based on the HTTP query parameters. Indeed, let's modify our example to echo back the query parameters received.
 
 `luna::query_params` is simply an alias for a key-value hash stored as an `std::map`. The keys and the values both are just `std:strings`. So, we might rewrite our request handler as such:
 
-    luna::response hello_world(const luna::endpoint_matches &matches, 
-                               const luna::query_params     &params)
+    response hello_world(const endpoint_matches &matches,
+                         const query_params     &params)
     {
-        std::string
-        return {"<h1>Hello, World!</h1>"};
+        std::stringstream body;
+        body << "<h1>Hello, World!</h1>\n<ul>\n";
+
+        for(auto& kv : params)
+        {
+            body << "<li><b>" << kv.first << "</b> " << kv.second << "</li>\n";
+        }
+
+        body << "</ul>";
+        return {body.str()};
     }
+
+
 
 <!-- To begin with, the `luna::server` object is the core of luna—it represents an HTTP server, and it is what determines how endpoints are served.
 
