@@ -9,7 +9,7 @@ You are writing in C++ (because C++ is _awesome_), and your app needs to ac as a
 
 ## Prerequisites
 
-A C++11 compiler, cmake 3.3, libmicrohttpd.
+A C++14 compiler (gcc 4.9, clang 3.3), cmake 3.2, libmicrohttpd.
 
 ## Example code
 
@@ -25,15 +25,17 @@ Here is some code for serving a simple JSON snippet from a single endpoint.
         server server{server::mime_type{"text/json"}, server::port{8443}};
 
         server.handle_response(request_method::GET,
-            "/endpoint", 
-            [](std::vector<std::string> matches,
-                query_params params, response &response) -> status_code
+                               "/endpoint",
+                               [](auto matches, auto params)
+                                   -> response
         {
-            response = {"{\"made_it\": true}"};
-            return 200;
+            return {"{\"made_it\": true}"};
         });
 
-        while (server); //idle while the server is running. Totally not the best way. But this is demo code!
+        //idle while the server is running.
+        //Totally not the best way.
+        //But this is demo code!
+        while (server);
     }
 
 ## License
