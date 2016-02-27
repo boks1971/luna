@@ -62,44 +62,29 @@ Of course, we could have loaded this HTML from a file, rather than specifying it
         return {body.str()};
     }
 
+## Setting the status code
 
+The response object contains the status code representing the success or failure of a request. By default, the status code is set to either 201 (for POST requests) or 200 (for all other requests). This is easily overriden to indicate other kinds of success, or a failure.
 
-<!-- To begin with, the `luna::server` object is the core of luna—it represents an HTTP server, and it is what determines how endpoints are served.
+    return {404, "<h1>Not Found</h1>"}
 
-Endpoints are set up on a `server` with `server::handle_request`. 
+## Setting the response MIME type
 
-    void handle_request(
-        request_method method,
-        std::string path,
-        endpoint_handler_cb callback);
+Not all HTTP servers respond with HTML. Many respond with, for example JSON or XML. You can specify a default MIME type for all responses when constructing a new server:
 
-- `method` is the HTTP verb to listen for, _e.g._ GET, POST, PUT, _&c._.
-- `path` is the name of the endpoint to listen for, beginning the a `/`. _e.g._ `/documents/`, `"/index.html"`, _&c._
-- `callback` is the action to take when the described endpoint is requested (see below).
+    server server{server::port{8334}, server::mime_type{"text/json"}};
 
-The `server` stores these endpoints in the order received, and when an HTTP request is made to the server, the first endpoint that matches the endpoint has its callback invoked. No further endpoints will be invoked once a match has been found.
+Or you can specify MIME types per response in the response contructor:
 
-The `callback` parameter is a functional type (_e.g._ a function pointer or lambda) with the signature
+    return {"text/json", "{\"error\":\"not found\""};
 
-    response callback(std::vector<std::string> matches, query_params params)
+## Setting response headers
 
-- `matches` is a vector containing information about how `server` decided this endpoint was the right match. We can ignore this safely for the time being
-- `query_params` is a map containing any query parameters (including POST data) that was passed to the endpoint.
-- The calback must return a `response` object (see below).
+At this moment, there is no facility for specifying custom response headers.
 
-Endpoint callbacks exist primarily to serve data to the HTTP client. At their most basic, they return a string containing HTML to be rendered by a web browser. However, you can also specify the MIME type of the data being returned (for example `"text/json"` if you are returning JSON data), as well as the status code (which defaults to 200 SUCCESS or 201 RESOURCE CREATED).
-
-The simplest callback might look something like this:
-
-    response my_callback(std::vector<endpoint_matches matches,
-                                         query_params params)
-    {
-        return {"<h1>Hello world!</h1>"};
-    }
-
- -->
 
 # TODO 
 - endpoint handlers probably also want the request body, not currently being passed in
 - no way to construct a response object with binary data, that's a real shame
 - responses are constructed in memory. Maybe we don't want that. Mayve we want to provide a hook in a response object for reading data chunks at a time.
+- custom response headers
