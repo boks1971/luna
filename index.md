@@ -3,9 +3,12 @@ layout: default
 title: Luna
 ---
 
-# A C++ library for embedding a webserver into your app
+# Luna
+## A C++ library for embedding a webserver into your app
 
-You are writing in C++ (because C++ is _awesome_), and your app needs to ac as an HTTP server. `libmicrohttpd` is super-awesome—except for that idiomatically C API. Luna is an idiomatically C++ wrapper for `libmicrohttpd`.
+You are writing in C++ (because C++ is _awesome_), and your app needs to act as an HTTP server. `libmicrohttpd` is super-awesome—except for that idiomatically C API. Luna is an idiomatically C++ wrapper for `libmicrohttpd`.
+
+Luna is designed to be easy to use. HTTPD server creation, starting, shutting down, and deletion are all handled behind the scenes. Starting a server is automatic with server creation, and allowing a server object to fall out of scope is all that is needed to cleanly shut it down. There is nothing else for you to keep track of, or allocate.
 
 ## Prerequisites
 

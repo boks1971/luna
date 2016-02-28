@@ -1,8 +1,8 @@
 ---
 layout: default
-title: Adding luna to your project
+title: Using Luna with your project
 ---
 
-# Adding luna to your project
+# Using Luna with your project
 
 This is something currently under active development. The plan is to enable [CPM](http://www.cpm.rocks) support to make adding this project as seamless as anything.

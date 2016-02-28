@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Advanced luna usage
+title: Defining endpoints with regexes
 ---
 
 # Defining endpoints with regexes
@@ -11,11 +11,10 @@ Sometimes you want to use a regex to capture a range of endpoints in one go. For
 
     server.handle_response(request_method::GET,
         "^/documents/(i[0-9a-f]{6})", 
-        [](std::vector<std::string> matches,
-            query_params params, response &response) -> status_code
-    {
-        // TODO...
-    });
+        [](auto matches, auto params) -> response
+        {
+            // TODO...
+        });
 
 This endpoint will only be invoked if the requested URL matches the regex provided; and the matches are passed on to you. The first match in the vector will be the entire path, not especially useful in this case. Because we defined a match group in the regex around the document id, the second match will contain the document id itself.
 

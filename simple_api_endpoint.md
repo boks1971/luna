@@ -1,9 +1,9 @@
 ---
 layout: default
-title: Serving a simple API endpoint
+title: Defining a simple API endpoint
 ---
 
-# HTTP Endpoint Basics
+# Defining a simple API endpoint
 
 ## Serving static HTML to a simple endpoint
 
