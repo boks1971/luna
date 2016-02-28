@@ -76,7 +76,7 @@ Not all HTTP servers respond with HTML. Many respond with, for example JSON or X
 
 Or you can specify MIME types per response in the response contructor:
 
-    return {"text/json", "{\"error\":\"not found\""};
+    return {"text/json", "{\"error\":\"not found\""}};
 
 ## Setting response headers
 
