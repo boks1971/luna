@@ -158,10 +158,19 @@ img {
 }
 
 header {
-  width:270px;
+  width:200px;
   float:left;
   position:fixed;
   -webkit-font-smoothing:subpixel-antialiased;
+}
+
+header h1 {
+  font-size:20px;
+}
+
+header h2 {
+  font-size:16px;
+
 }
 
 header #download {
@@ -225,7 +234,7 @@ header #download a strong {
 
 section {
   width: calc(100% - 300px);
-  float:left;
+  /*float:left;*/
   padding-left:300px;
   padding-bottom:50px;
 }
@@ -242,9 +251,9 @@ hr {
 }
 
 footer {
-  width:270px;
-  float:left;
-  position:fixed;
+  /*width:270px;*/
+  float:right;
+  /*position:fixed;*/
   bottom:50px;
   -webkit-font-smoothing:subpixel-antialiased;
 }
