@@ -30,7 +30,7 @@ include(${CPM_DIR}/CPM.cmake)
 # ++ MODULE: luna
 CPM_AddModule("luna"
         GIT_REPOSITORY "https://github.com/DEGoodmanWilson/luna"
-        GIT_TAG "cpm")
+        GIT_TAG "v1.0.0-beta1")
 
 CPM_Finish()
 
