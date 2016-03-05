@@ -6,11 +6,14 @@ using namespace luna;
 
 int main()
 {
-    server s{server::port{7000}, server::logger_cb{[](const std::string& mesg)
-    {
-        std::cout << mesg << std::endl;
-    }}};
 
+    luna::set_logger([](luna::log_level level, const std::string& mesg)
+    {
+        std::cout << to_string(level) << ": " << mesg << std::endl;
+    });
+
+
+    server s{server::port{7000}};
 
     s.handle_request(request_method::GET, "/hello", [](auto matches, auto params) -> response
     {
