@@ -26,12 +26,10 @@ Here is some code for serving a simple JSON snippet from a single endpoint.
 
     int main(void)
     {
-        server server{server::mime_type{"text/json"}, server::port{8443}};
+        server server{server::mime_type{"application/json"}, server::port{8443}};
 
-        server.handle_response(request_method::GET,
-                               "/endpoint",
-                               [](auto matches, auto params)
-                                   -> response
+        server.handle_response(request_method::GET, "/endpoint",
+                               [](auto matches, auto params) -> response
         {
             return {"{\"made_it\": true}"};
         });

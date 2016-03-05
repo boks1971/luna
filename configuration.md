@@ -3,7 +3,22 @@ layout: default
 title: Configuration options
 ---
 
-# Configuration options
+# Global configuration options
+
+## Logger
+
+The Luna logger is a `functional` type that you provide. To set it, you can pass to `luna::set_logger()` a function pointer, a non-static class method via `std::bind`, an `std::function` object, or a lambda with the following signature
+
+    void (luna::log_level, const std::string &)
+
+For example, to log messages to `stdout`, we could write a lambda:
+
+    luna::set_logger([](luna::log_level level, const std::string &message)
+    {
+        std::cout << to_string(level) < ": " << message << std::endl;
+    });
+
+# Server configuration options
 
 As `luna::server` is the object through which all interactions happen, configuration options are set via the `server` contructor. The most important option may well be the port that your `server` object will listen on:
 
@@ -24,17 +39,6 @@ Because with the _named option_ pattern order doesn't matter, we could have just
     server my_server{server::port{8446}, server::mime_type{"text/json"}};
 
 ## Options that are callbacks
-
-Some configuration options allow you to set a callback. For example, the option `server::logger_cb` allows you to define your own logging function. To set it, you can pass any `functional` type as the parameter: A function pointer, a non-static class method via `std::bind`, an `std::function` object, or a lambda.
-
-For example, if we want to set up a logger that logs everything to `stdout` using a lmabda, we could do the following:
-
-    server logging_server{server::port{7001}, server::logger_cb{
-        [](const std::string message)
-        {
-            std::cout << message << std::endl;
-        }
-        }};
 
 # Configuration options
 
