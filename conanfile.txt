@@ -1,0 +1,5 @@
+[requires]
+luna/1.0.0-beta5@luna/testing
+
+[generators]
+cmake
