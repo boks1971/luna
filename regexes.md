@@ -24,6 +24,5 @@ Let us suppose that in our filesystem, we have a flat folder full of documents n
         auto doc_id = matches[1];
         // load the file named doc_id+."txt" into a std::string called contents
 
-        response = {"text/plain", contents};
-        return 200;
+        return {"text/plain", contents};
     }

@@ -42,7 +42,7 @@ Here is some code for serving a simple JSON snippet from a single endpoint.
 
 ## License
 
-Apache License, Version 2.0
+[MIT](https://github.com/DEGoodmanWilson/luna/blob/master/LICENSE)
 
 ## Disclaimer
 

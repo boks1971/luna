@@ -86,5 +86,5 @@ At this moment, there is no facility for specifying custom response headers.
 # TODO 
 - endpoint handlers probably also want the request body, not currently being passed in
 - no way to construct a response object with binary data, that's a real shame
-- responses are constructed in memory. Maybe we don't want that. Mayve we want to provide a hook in a response object for reading data chunks at a time.
+- responses are constructed in memory. Maybe we don't want that. Maybe we want to provide a hook in a response object for reading data chunks at a time.
 - custom response headers
