@@ -46,7 +46,7 @@ matrix:
             - libmicrohttpd10
             - libssl-dev
             - curl
-      env: GCC_VERSION=4.9
+      env: GCC_VERSION=4.9 RUN_TESTS=ON
 
     - compiler: gcc
       addons:
@@ -60,7 +60,7 @@ matrix:
             - libmicrohttpd10
             - libssl-dev
             - curl
-      env: GCC_VERSION=5
+      env: GCC_VERSION=5 RUN_TESTS=ON
 
     - compiler: clang
       addons:
@@ -74,7 +74,7 @@ matrix:
             - libmicrohttpd10
             - libssl-dev
             - curl
-      env: COMPILER=clang++-3.6
+      env: COMPILER=clang++-3.6 RUN_TESTS=ON
 
     - compiler: clang
       addons:
@@ -88,7 +88,7 @@ matrix:
             - libmicrohttpd10
             - libssl-dev
             - curl
-      env: COMPILER=clang++-3.7
+      env: COMPILER=clang++-3.7 RUN_TESTS=ON
 
     - compiler: clang
       addons:
