@@ -17,31 +17,33 @@ Adding endpoints to your server is likewise meant to be simple. Nominate an endp
 
 But don't take my word for it. Here is some code for serving a simple JSON snippet from a single endpoint.
 
-    #include <string>
-    #include <luna/server.h>
+```
+#include <string>
+#include <luna/server.h>
 
-    using namespace luna;
+using namespace luna;
 
-    int main(void)
+int main(void)
+{
+    //start a server delivering JSON by default on the default port 8080
+    server server{
+        server::mime_type{"application/json"} //the default is "text/html; charset=UTF-8"
+    };
+
+    // Handle GET requests to "localhost:8080/endpoint"
+    // Respond with a tiny bit of fun JSON
+    server.handle_response(request_method::GET, "/endpoint",
+                           [](auto matches, auto params) -> response
     {
-        //start a server delivering JSON by default on the default port 8080
-        server server{
-            server::mime_type{"application/json"} //the default is "text/html; charset=UTF-8"
-        };
+        return {"{\"made_it\": true}"};
+    });
 
-        // Handle GET requests to "localhost:8080/endpoint"
-        // Respond with a tiny bit of fun JSON
-        server.handle_response(request_method::GET, "/endpoint",
-                               [](auto matches, auto params) -> response
-        {
-            return {"{\"made_it\": true}"};
-        });
-
-        // idle while the server is running.
-        // Totally not the best way.
-        // But this is demo code!
-        while (server);
-    }
+    // idle while the server is running.
+    // Totally not the best way.
+    // But this is demo code!
+    while (server);
+}
+```
 
 ## Prerequisites
 
