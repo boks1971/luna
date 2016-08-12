@@ -16,8 +16,7 @@ Suppose we want to handle a request to `/hello_world` by responding with a simpl
 Let's begin by writing a simple function to act as a request handler (nevermind what the request _is_).
     
     using namespace luna;
-    response hello_world(const endpoint_matches &matches, 
-                         const query_params     &params)
+    response hello_world(const request &req)
     {
         return {"<h1>Hello, World!</h1>"};
     }
@@ -47,13 +46,12 @@ Of course, we could have loaded this HTML from a file, rather than specifying it
 
 `luna::query_params` is simply an alias for a key-value hash stored as an `std::map`. The keys and the values both are just `std:strings`. So, we might rewrite our request handler as such:
 
-    response hello_world(const endpoint_matches &matches,
-                         const query_params     &params)
+    response hello_world(const request &req)
     {
         std::stringstream body;
         body << "<h1>Hello, World!</h1>\n<ul>\n";
 
-        for(auto& kv : params)
+        for(auto& kv : req.params)
         {
             body << "<li><b>" << kv.first << "</b> " << kv.second << "</li>\n";
         }
@@ -84,7 +82,6 @@ At this moment, there is no facility for specifying custom response headers.
 
 
 # TODO 
-- endpoint handlers probably also want the request body, not currently being passed in
 - no way to construct a response object with binary data, that's a real shame
 - responses are constructed in memory. Maybe we don't want that. Maybe we want to provide a hook in a response object for reading data chunks at a time.
 - custom response headers

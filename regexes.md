@@ -11,7 +11,7 @@ Sometimes you want to use a regex to capture a range of endpoints in one go. For
 
     server.handle_response(request_method::GET,
         "^/documents/(i[0-9a-f]{6})", 
-        [](auto matches, auto params) -> response
+        [](auto request) -> response
         {
             // TODO...
         });
@@ -21,7 +21,7 @@ This endpoint will only be invoked if the requested URL matches the regex provid
 Let us suppose that in our filesystem, we have a flat folder full of documents named `[document id].txt`. We could return the text documents as such:
 
     {
-        auto doc_id = matches[1];
+        auto doc_id = request.matches[1];
         // load the file named doc_id+."txt" into a std::string called contents
 
         return {"text/plain", contents};
